@@ -1945,6 +1945,17 @@ export const useStudiosDestroy = (input: GQL.StudiosDestroyMutationVariables) =>
     },
   });
 
+export const useBulkStudioUpdate = (input: GQL.BulkStudioUpdateInput) =>
+  GQL.useBulkStudioUpdateMutation({
+    variables: { input },
+    update(cache, result) {
+      if (!result.data?.bulkStudioUpdate) return;
+
+      evictTypeFields(cache, studioMutationImpactedTypeFields);
+      evictQueries(cache, studioMutationImpactedQueries);
+    },
+  });
+
 const tagMutationImpactedTypeFields = {
   Tag: ["parents", "children"],
 };
