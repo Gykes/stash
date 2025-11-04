@@ -90,6 +90,9 @@ func (qb *imageFilterHandler) criterionHandler() criterionHandler {
 		qb.performerAgeCriterionHandler(imageFilter.PerformerAge),
 		&timestampCriterionHandler{imageFilter.CreatedAt, "images.created_at", nil},
 		&timestampCriterionHandler{imageFilter.UpdatedAt, "images.updated_at", nil},
+		&relativeDateCriterionHandler{imageFilter.DateRelative, "images.date", nil, true},
+		&relativeDateCriterionHandler{imageFilter.CreatedAtRelative, "images.created_at", nil, false},
+		&relativeDateCriterionHandler{imageFilter.UpdatedAtRelative, "images.updated_at", nil, false},
 
 		&relatedFilterHandler{
 			relatedIDCol:   "galleries_images.gallery_id",

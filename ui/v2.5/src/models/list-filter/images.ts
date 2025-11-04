@@ -4,6 +4,7 @@ import {
   createStringCriterionOption,
   createMandatoryTimestampCriterionOption,
   createDateCriterionOption,
+  createRelativeDateCriterionOption,
 } from "./criteria/criterion";
 import { PerformerFavoriteCriterionOption } from "./criteria/favorite";
 import { ImageIsMissingCriterionOption } from "./criteria/is-missing";
@@ -59,9 +60,12 @@ const criterionOptions = [
   StudiosCriterionOption,
   createStringCriterionOption("url"),
   createDateCriterionOption("date"),
+  createRelativeDateCriterionOption("date_relative", "date_relative"),
   createMandatoryNumberCriterionOption("file_count"),
   createMandatoryTimestampCriterionOption("created_at"),
+  createRelativeDateCriterionOption("created_at_relative", "created_at_relative"),
   createMandatoryTimestampCriterionOption("updated_at"),
+  createRelativeDateCriterionOption("updated_at_relative", "updated_at_relative"),
 ];
 export const ImageListFilterOptions = new ListFilterOptions(
   defaultSortBy,

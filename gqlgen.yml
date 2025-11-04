@@ -49,6 +49,13 @@ models:
     model: github.com/stashapp/stash/pkg/models.Group
   MovieFilterType:
     model: github.com/stashapp/stash/pkg/models.GroupFilterType
+  # relative date filtering
+  TimeUnit:
+    model: github.com/stashapp/stash/pkg/models.TimeUnit
+  RelativeDateCriterionInput:
+    model: github.com/stashapp/stash/pkg/models.RelativeDateCriterionInput
+  SceneMarkerFilterType:
+    model: github.com/stashapp/stash/pkg/models.SceneMarkerFilterType
   # autobind on config causes generation issues
   BlobsStorageType:
     model: github.com/stashapp/stash/internal/manager/config.BlobsStorageType

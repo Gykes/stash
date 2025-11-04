@@ -141,6 +141,17 @@ func (qb *sceneFilterHandler) criterionHandler() criterionHandler {
 				h.handle(ctx, f)
 			}
 		}),
+		criterionHandlerFunc(func(ctx context.Context, f *filterBuilder) {
+			if sceneFilter.LastPlayedAtRelative != nil {
+				f.addLeftJoin(
+					fmt.Sprintf("(SELECT %s, MAX(%s) as last_played_at FROM %s GROUP BY %s)", sceneIDColumn, sceneViewDateColumn, scenesViewDatesTable, sceneIDColumn),
+					"scene_last_view",
+					fmt.Sprintf("scene_last_view.%s = scenes.id", sceneIDColumn),
+				)
+				h := relativeDateCriterionHandler{sceneFilter.LastPlayedAtRelative, "IFNULL(last_played_at, datetime(0))", nil, false}
+				h.handle(ctx, f)
+			}
+		}),
 
 		qb.tagsCriterionHandler(sceneFilter.Tags),
 		qb.tagCountCriterionHandler(sceneFilter.TagCount),
@@ -159,6 +170,9 @@ func (qb *sceneFilterHandler) criterionHandler() criterionHandler {
 		&dateCriterionHandler{sceneFilter.Date, "scenes.date", nil},
 		&timestampCriterionHandler{sceneFilter.CreatedAt, "scenes.created_at", nil},
 		&timestampCriterionHandler{sceneFilter.UpdatedAt, "scenes.updated_at", nil},
+		&relativeDateCriterionHandler{sceneFilter.DateRelative, "scenes.date", nil, true},
+		&relativeDateCriterionHandler{sceneFilter.CreatedAtRelative, "scenes.created_at", nil, false},
+		&relativeDateCriterionHandler{sceneFilter.UpdatedAtRelative, "scenes.updated_at", nil, false},
 
 		&relatedFilterHandler{
 			relatedIDCol:   "scenes_galleries.gallery_id",

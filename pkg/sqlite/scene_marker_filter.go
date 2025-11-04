@@ -47,6 +47,11 @@ func (qb *sceneMarkerFilterHandler) criterionHandler() criterionHandler {
 		&dateCriterionHandler{sceneMarkerFilter.SceneDate, "scenes.date", qb.joinScenes},
 		&timestampCriterionHandler{sceneMarkerFilter.SceneCreatedAt, "scenes.created_at", qb.joinScenes},
 		&timestampCriterionHandler{sceneMarkerFilter.SceneUpdatedAt, "scenes.updated_at", qb.joinScenes},
+		&relativeDateCriterionHandler{sceneMarkerFilter.CreatedAtRelative, "scene_markers.created_at", nil, false},
+		&relativeDateCriterionHandler{sceneMarkerFilter.UpdatedAtRelative, "scene_markers.updated_at", nil, false},
+		&relativeDateCriterionHandler{sceneMarkerFilter.SceneDateRelative, "scenes.date", qb.joinScenes, true},
+		&relativeDateCriterionHandler{sceneMarkerFilter.SceneCreatedAtRelative, "scenes.created_at", qb.joinScenes, false},
+		&relativeDateCriterionHandler{sceneMarkerFilter.SceneUpdatedAtRelative, "scenes.updated_at", qb.joinScenes, false},
 
 		&relatedFilterHandler{
 			relatedIDCol:   "scenes.id",

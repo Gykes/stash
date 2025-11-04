@@ -17,12 +17,22 @@ type SceneMarkerFilterType struct {
 	CreatedAt *TimestampCriterionInput `json:"created_at"`
 	// Filter by updated at
 	UpdatedAt *TimestampCriterionInput `json:"updated_at"`
+	// Filter by creation time (relative)
+	CreatedAtRelative *RelativeDateCriterionInput `json:"created_at_relative"`
+	// Filter by update time (relative)
+	UpdatedAtRelative *RelativeDateCriterionInput `json:"updated_at_relative"`
 	// Filter by scenes date
 	SceneDate *DateCriterionInput `json:"scene_date"`
 	// Filter by scenes created at
 	SceneCreatedAt *TimestampCriterionInput `json:"scene_created_at"`
 	// Filter by scenes updated at
 	SceneUpdatedAt *TimestampCriterionInput `json:"scene_updated_at"`
+	// Filter by scenes date (relative)
+	SceneDateRelative *RelativeDateCriterionInput `json:"scene_date_relative"`
+	// Filter by scene creation time (relative)
+	SceneCreatedAtRelative *RelativeDateCriterionInput `json:"scene_created_at_relative"`
+	// Filter by scene last update time (relative)
+	SceneUpdatedAtRelative *RelativeDateCriterionInput `json:"scene_updated_at_relative"`
 	// Filter by related scenes that meet this criteria
 	SceneFilter *SceneFilterType `json:"scene_filter"`
 }

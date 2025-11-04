@@ -50,4 +50,8 @@ type TagFilterType struct {
 	CreatedAt *TimestampCriterionInput `json:"created_at"`
 	// Filter by updated at
 	UpdatedAt *TimestampCriterionInput `json:"updated_at"`
+	// Filter by creation time (relative)
+	CreatedAtRelative *RelativeDateCriterionInput `json:"created_at_relative"`
+	// Filter by update time (relative)
+	UpdatedAtRelative *RelativeDateCriterionInput `json:"updated_at_relative"`
 }

@@ -317,6 +317,88 @@ func getTimestampWhereClause(column string, modifier models.CriterionModifier, v
 	panic("unsupported date modifier type")
 }
 
+// getRelativeDateCriterionWhereClause converts a relative date input to an absolute date and returns the WHERE clause.
+// For date columns (storing date strings like "2024-01-15").
+func getRelativeDateCriterionWhereClause(column string, input models.RelativeDateCriterionInput) (string, []interface{}) {
+	// Calculate the target date based on value and unit
+	targetDate := calculateRelativeDate(input.Value, input.Unit)
+
+	// Invert the modifier because "GREATER_THAN 30 days" means "more than 30 days ago" (older)
+	// which translates to "created_at < (now - 30 days)"
+	invertedModifier := invertRelativeDateModifier(input.Modifier)
+
+	// Use existing date where clause logic
+	return getDateWhereClause(column, invertedModifier, targetDate, nil)
+}
+
+// getRelativeTimestampCriterionWhereClause converts a relative date input to an absolute timestamp and returns the WHERE clause.
+// For timestamp columns (storing RFC3339 timestamps).
+func getRelativeTimestampCriterionWhereClause(column string, input models.RelativeDateCriterionInput) (string, []interface{}) {
+	// Calculate the target timestamp based on value and unit
+	targetTimestamp := calculateRelativeTimestamp(input.Value, input.Unit)
+
+	// Invert the modifier because "GREATER_THAN 30 days" means "more than 30 days ago" (older)
+	// which translates to "created_at < (now - 30 days)"
+	invertedModifier := invertRelativeDateModifier(input.Modifier)
+
+	// Use existing timestamp where clause logic
+	return getTimestampWhereClause(column, invertedModifier, targetTimestamp, nil)
+}
+
+// invertRelativeDateModifier inverts the comparison modifier for relative dates
+// because "greater than X days ago" means "before the date X days ago"
+func invertRelativeDateModifier(modifier models.CriterionModifier) models.CriterionModifier {
+	switch modifier {
+	case models.CriterionModifierGreaterThan:
+		return models.CriterionModifierLessThan
+	case models.CriterionModifierLessThan:
+		return models.CriterionModifierGreaterThan
+	default:
+		// For EQUALS, IS_NULL, NOT_NULL, etc., don't invert
+		return modifier
+	}
+}
+
+// calculateRelativeDate calculates the date string based on relative date input.
+// Returns a date string in "2006-01-02" format (e.g., "2024-01-15").
+func calculateRelativeDate(value int, unit models.TimeUnit) string {
+	now := time.Now()
+
+	var targetDate time.Time
+	switch unit {
+	case models.TimeUnitDays:
+		targetDate = now.AddDate(0, 0, -value)
+	case models.TimeUnitMonths:
+		targetDate = now.AddDate(0, -value, 0)
+	case models.TimeUnitYears:
+		targetDate = now.AddDate(-value, 0, 0)
+	default:
+		panic("unsupported time unit")
+	}
+
+	return targetDate.Format("2006-01-02")
+}
+
+// calculateRelativeTimestamp calculates the timestamp string based on relative date input.
+// Returns a timestamp string in RFC3339 format.
+func calculateRelativeTimestamp(value int, unit models.TimeUnit) string {
+	now := time.Now()
+
+	var targetTime time.Time
+	switch unit {
+	case models.TimeUnitDays:
+		targetTime = now.AddDate(0, 0, -value)
+	case models.TimeUnitMonths:
+		targetTime = now.AddDate(0, -value, 0)
+	case models.TimeUnitYears:
+		targetTime = now.AddDate(-value, 0, 0)
+	default:
+		panic("unsupported time unit")
+	}
+
+	return targetTime.Format(time.RFC3339)
+}
+
 // returns where clause and having clause
 func getMultiCriterionClause(primaryTable, foreignTable, joinTable, primaryFK, foreignFK string, criterion *models.MultiCriterionInput) (string, string) {
 	whereClause := ""

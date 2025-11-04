@@ -185,6 +185,55 @@ type TimestampCriterionInput struct {
 	Modifier CriterionModifier `json:"modifier"`
 }
 
+type TimeUnit string
+
+const (
+	TimeUnitDays   TimeUnit = "DAYS"
+	TimeUnitMonths TimeUnit = "MONTHS"
+	TimeUnitYears  TimeUnit = "YEARS"
+)
+
+var AllTimeUnit = []TimeUnit{
+	TimeUnitDays,
+	TimeUnitMonths,
+	TimeUnitYears,
+}
+
+func (e TimeUnit) IsValid() bool {
+	switch e {
+	case TimeUnitDays, TimeUnitMonths, TimeUnitYears:
+		return true
+	}
+	return false
+}
+
+func (e TimeUnit) String() string {
+	return string(e)
+}
+
+func (e *TimeUnit) UnmarshalGQL(v interface{}) error {
+	str, ok := v.(string)
+	if !ok {
+		return fmt.Errorf("enums must be strings")
+	}
+
+	*e = TimeUnit(str)
+	if !e.IsValid() {
+		return fmt.Errorf("%s is not a valid TimeUnit", str)
+	}
+	return nil
+}
+
+func (e TimeUnit) MarshalGQL(w io.Writer) {
+	fmt.Fprint(w, strconv.Quote(e.String()))
+}
+
+type RelativeDateCriterionInput struct {
+	Value    int               `json:"value"`
+	Unit     TimeUnit          `json:"unit"`
+	Modifier CriterionModifier `json:"modifier"`
+}
+
 type PhashDistanceCriterionInput struct {
 	Value    string            `json:"value"`
 	Modifier CriterionModifier `json:"modifier"`

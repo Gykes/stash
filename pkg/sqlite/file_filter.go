@@ -79,6 +79,9 @@ func (qb *fileFilterHandler) criterionHandler() criterionHandler {
 		qb.phashDuplicatedCriterionHandler(fileFilter.Duplicated),
 		&timestampCriterionHandler{fileFilter.CreatedAt, "files.created_at", nil},
 		&timestampCriterionHandler{fileFilter.UpdatedAt, "files.updated_at", nil},
+		&relativeDateCriterionHandler{fileFilter.ModTimeRelative, "files.mod_time", nil, false},
+		&relativeDateCriterionHandler{fileFilter.CreatedAtRelative, "files.created_at", nil, false},
+		&relativeDateCriterionHandler{fileFilter.UpdatedAtRelative, "files.updated_at", nil, false},
 
 		&relatedFilterHandler{
 			relatedIDCol:   "scenes_files.scene_id",

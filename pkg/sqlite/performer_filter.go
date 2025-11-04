@@ -169,6 +169,10 @@ func (qb *performerFilterHandler) criterionHandler() criterionHandler {
 		&dateCriterionHandler{filter.DeathDate, tableName + ".death_date", nil},
 		&timestampCriterionHandler{filter.CreatedAt, tableName + ".created_at", nil},
 		&timestampCriterionHandler{filter.UpdatedAt, tableName + ".updated_at", nil},
+		&relativeDateCriterionHandler{filter.BirthdateRelative, "performers.birthdate", nil, true},
+		&relativeDateCriterionHandler{filter.DeathDateRelative, "performers.death_date", nil, true},
+		&relativeDateCriterionHandler{filter.CreatedAtRelative, "performers.created_at", nil, false},
+		&relativeDateCriterionHandler{filter.UpdatedAtRelative, "performers.updated_at", nil, false},
 
 		&relatedFilterHandler{
 			relatedIDCol:   "performers_scenes.scene_id",

@@ -4,6 +4,7 @@ import {
   createMandatoryTimestampCriterionOption,
   createDurationCriterionOption,
   createMandatoryNumberCriterionOption,
+  createRelativeDateCriterionOption,
 } from "./criteria/criterion";
 import { GroupIsMissingCriterionOption } from "./criteria/is-missing";
 import { StudiosCriterionOption } from "./criteria/studios";
@@ -49,6 +50,7 @@ const criterionOptions = [
   RatingCriterionOption,
   PerformersCriterionOption,
   createDateCriterionOption("date"),
+  createRelativeDateCriterionOption("date_relative", "date_relative"),
   ContainingGroupsCriterionOption,
   SubGroupsCriterionOption,
   createMandatoryNumberCriterionOption("containing_group_count"),
@@ -56,7 +58,9 @@ const criterionOptions = [
   TagsCriterionOption,
   createMandatoryNumberCriterionOption("tag_count"),
   createMandatoryTimestampCriterionOption("created_at"),
+  createRelativeDateCriterionOption("created_at_relative", "created_at_relative"),
   createMandatoryTimestampCriterionOption("updated_at"),
+  createRelativeDateCriterionOption("updated_at_relative", "updated_at_relative"),
 ];
 
 export const GroupListFilterOptions = new ListFilterOptions(

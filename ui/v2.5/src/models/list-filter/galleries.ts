@@ -3,6 +3,7 @@ import {
   createStringCriterionOption,
   createDateCriterionOption,
   createMandatoryTimestampCriterionOption,
+  createRelativeDateCriterionOption,
 } from "./criteria/criterion";
 import { PerformerFavoriteCriterionOption } from "./criteria/favorite";
 import { GalleryIsMissingCriterionOption } from "./criteria/is-missing";
@@ -69,8 +70,11 @@ const criterionOptions = [
   createStringCriterionOption("url"),
   createMandatoryNumberCriterionOption("file_count", "zip_file_count"),
   createDateCriterionOption("date"),
+  createRelativeDateCriterionOption("date_relative", "date_relative"),
   createMandatoryTimestampCriterionOption("created_at"),
+  createRelativeDateCriterionOption("created_at_relative", "created_at_relative"),
   createMandatoryTimestampCriterionOption("updated_at"),
+  createRelativeDateCriterionOption("updated_at_relative", "updated_at_relative"),
 ];
 
 export const GalleryListFilterOptions = new ListFilterOptions(

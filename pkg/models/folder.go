@@ -35,6 +35,12 @@ type FolderFilterType struct {
 	CreatedAt *TimestampCriterionInput `json:"created_at,omitempty"`
 	// Filter by last update time
 	UpdatedAt *TimestampCriterionInput `json:"updated_at,omitempty"`
+	// Filter by modification time (relative)
+	ModTimeRelative *RelativeDateCriterionInput `json:"mod_time_relative,omitempty"`
+	// Filter by creation time (relative)
+	CreatedAtRelative *RelativeDateCriterionInput `json:"created_at_relative,omitempty"`
+	// Filter by update time (relative)
+	UpdatedAtRelative *RelativeDateCriterionInput `json:"updated_at_relative,omitempty"`
 }
 
 func PathsFolderFilter(paths []string) *FileFilterType {

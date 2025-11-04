@@ -80,6 +80,9 @@ func (qb *groupFilterHandler) criterionHandler() criterionHandler {
 		groupHierarchyHandler.ChildCountCriterionHandler(groupFilter.SubGroupCount),
 		&timestampCriterionHandler{groupFilter.CreatedAt, "groups.created_at", nil},
 		&timestampCriterionHandler{groupFilter.UpdatedAt, "groups.updated_at", nil},
+		&relativeDateCriterionHandler{groupFilter.DateRelative, "groups.date", nil, true},
+		&relativeDateCriterionHandler{groupFilter.CreatedAtRelative, "groups.created_at", nil, false},
+		&relativeDateCriterionHandler{groupFilter.UpdatedAtRelative, "groups.updated_at", nil, false},
 
 		&relatedFilterHandler{
 			relatedIDCol:   "groups_scenes.scene_id",

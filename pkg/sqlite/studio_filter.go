@@ -84,6 +84,8 @@ func (qb *studioFilterHandler) criterionHandler() criterionHandler {
 		qb.childCountCriterionHandler(studioFilter.ChildCount),
 		&timestampCriterionHandler{studioFilter.CreatedAt, studioTable + ".created_at", nil},
 		&timestampCriterionHandler{studioFilter.UpdatedAt, studioTable + ".updated_at", nil},
+		&relativeDateCriterionHandler{studioFilter.CreatedAtRelative, "studios.created_at", nil, false},
+		&relativeDateCriterionHandler{studioFilter.UpdatedAtRelative, "studios.updated_at", nil, false},
 
 		&relatedFilterHandler{
 			relatedIDCol:   "scenes.id",

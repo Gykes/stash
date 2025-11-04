@@ -10,6 +10,7 @@ import {
   ILabeledIdCriterion,
   DateCriterion,
   TimestampCriterion,
+  RelativeDateCriterion,
   BooleanCriterion,
   Criterion,
 } from "src/models/list-filter/criteria/criterion";
@@ -27,6 +28,7 @@ import { HierarchicalLabelValueFilter } from "./Filters/HierarchicalLabelValueFi
 import { InputFilter } from "./Filters/InputFilter";
 import { DateFilter } from "./Filters/DateFilter";
 import { TimestampFilter } from "./Filters/TimestampFilter";
+import { RelativeDateFilter } from "./Filters/RelativeDateFilter";
 import { CountryCriterion } from "src/models/list-filter/criteria/country";
 import { CountrySelect } from "../Shared/CountrySelect";
 import { StashIDCriterion } from "src/models/list-filter/criteria/stash-ids";
@@ -211,6 +213,14 @@ const GenericCriterionEditor: React.FC<IGenericCriterionEditor> = ({
     if (criterion instanceof TimestampCriterion) {
       return (
         <TimestampFilter
+          criterion={criterion}
+          onValueChanged={onValueChanged}
+        />
+      );
+    }
+    if (criterion instanceof RelativeDateCriterion) {
+      return (
+        <RelativeDateFilter
           criterion={criterion}
           onValueChanged={onValueChanged}
         />

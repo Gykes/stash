@@ -5,6 +5,7 @@ import {
   createStringCriterionOption,
   MandatoryNumberCriterionOption,
   createMandatoryTimestampCriterionOption,
+  createRelativeDateCriterionOption,
 } from "./criteria/criterion";
 import { TagIsMissingCriterionOption } from "./criteria/is-missing";
 import { ListFilterOptions } from "./filter-options";
@@ -70,7 +71,9 @@ const criterionOptions = [
   ChildTagsCriterionOption,
   new MandatoryNumberCriterionOption("sub_tag_count", "child_count"),
   createMandatoryTimestampCriterionOption("created_at"),
+  createRelativeDateCriterionOption("created_at_relative", "created_at_relative"),
   createMandatoryTimestampCriterionOption("updated_at"),
+  createRelativeDateCriterionOption("updated_at_relative", "updated_at_relative"),
 ];
 
 export const TagListFilterOptions = new ListFilterOptions(

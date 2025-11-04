@@ -8,6 +8,8 @@ import {
   TimestampCriterionInput,
   ConfigDataFragment,
   DateCriterionInput,
+  RelativeDateCriterionInput,
+  TimeUnit,
 } from "src/core/generated-graphql";
 import TextUtils from "src/utils/text";
 import {
@@ -19,6 +21,7 @@ import {
   IStashIDValue,
   IDateValue,
   ITimestampValue,
+  IRelativeDateValue,
   ILabeledValueListValue,
   IPhashDistanceValue,
   IRangeValue,
@@ -36,6 +39,7 @@ export type CriterionValue =
   | IStashIDValue
   | IDateValue
   | ITimestampValue
+  | IRelativeDateValue
   | IPhashDistanceValue;
 
 export interface ISavedCriterion<T> {
@@ -1193,5 +1197,68 @@ export class TimestampCriterion extends ModifierCriterion<ITimestampValue> {
     }
 
     return true;
+  }
+}
+
+// Relative Date Criterion for filtering by relative time periods (e.g., "last 30 days")
+export class RelativeDateCriterionOption extends ModifierCriterionOption {
+  constructor(messageID: string, value: CriterionType) {
+    super({
+      messageID,
+      type: value,
+      modifierOptions: [
+        CriterionModifier.GreaterThan,
+        CriterionModifier.LessThan,
+      ],
+      defaultModifier: CriterionModifier.LessThan,
+      inputType: "number",
+      makeCriterion: () => new RelativeDateCriterion(this),
+    });
+  }
+}
+
+export function createRelativeDateCriterionOption(value: CriterionType, messageID?: string) {
+  return new RelativeDateCriterionOption(messageID ?? value, value);
+}
+
+export class RelativeDateCriterion extends ModifierCriterion<IRelativeDateValue> {
+  constructor(type: ModifierCriterionOption) {
+    super(type, { value: 30, unit: TimeUnit.Days });
+  }
+
+  public cloneValues() {
+    this.value = { ...this.value };
+  }
+
+  public toCriterionInput(): RelativeDateCriterionInput {
+    return {
+      modifier: this.modifier,
+      value: this.value?.value ?? 30,
+      unit: (this.value?.unit ?? TimeUnit.Days) as TimeUnit,
+    };
+  }
+
+  public setFromSavedCriterion(c: {
+    modifier: CriterionModifier;
+    value: IRelativeDateValue;
+  }) {
+    super.setFromSavedCriterion(c);
+  }
+
+  protected encodeValue(): unknown {
+    return this.value;
+  }
+
+  protected getLabelValue(intl: IntlShape) {
+    const { value, unit } = this.value;
+    const unitLabel = unit === TimeUnit.Days ? intl.formatMessage({ id: "time_unit.days" }) :
+                      unit === TimeUnit.Months ? intl.formatMessage({ id: "time_unit.months" }) :
+                      intl.formatMessage({ id: "time_unit.years" });
+    return `${value} ${unitLabel}`;
+  }
+
+  public isValid(): boolean {
+    const { value } = this.value;
+    return value !== undefined && value > 0;
   }
 }

@@ -4,6 +4,7 @@ import {
   createMandatoryStringCriterionOption,
   createStringCriterionOption,
   createMandatoryTimestampCriterionOption,
+  createRelativeDateCriterionOption,
 } from "./criteria/criterion";
 import { FavoriteStudioCriterionOption } from "./criteria/favorite";
 import { StudioIsMissingCriterionOption } from "./criteria/is-missing";
@@ -58,7 +59,9 @@ const criterionOptions = [
     "subsidiary_studio_count"
   ),
   createMandatoryTimestampCriterionOption("created_at"),
+  createRelativeDateCriterionOption("created_at_relative", "created_at_relative"),
   createMandatoryTimestampCriterionOption("updated_at"),
+  createRelativeDateCriterionOption("updated_at_relative", "updated_at_relative"),
 ];
 
 export const StudioListFilterOptions = new ListFilterOptions(

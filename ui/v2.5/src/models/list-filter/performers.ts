@@ -5,6 +5,7 @@ import {
   createBooleanCriterionOption,
   createDateCriterionOption,
   createMandatoryTimestampCriterionOption,
+  createRelativeDateCriterionOption,
 } from "./criteria/criterion";
 import { FavoritePerformerCriterionOption } from "./criteria/favorite";
 import { GenderCriterionOption } from "./criteria/gender";
@@ -108,9 +109,13 @@ const criterionOptions = [
   ...numberCriteria.map((c) => createNumberCriterionOption(c)),
   ...stringCriteria.map((c) => createStringCriterionOption(c)),
   createDateCriterionOption("birthdate"),
+  createRelativeDateCriterionOption("birthdate_relative", "birthdate_relative"),
   createDateCriterionOption("death_date"),
+  createRelativeDateCriterionOption("death_date_relative", "death_date_relative"),
   createMandatoryTimestampCriterionOption("created_at"),
+  createRelativeDateCriterionOption("created_at_relative", "created_at_relative"),
   createMandatoryTimestampCriterionOption("updated_at"),
+  createRelativeDateCriterionOption("updated_at_relative", "updated_at_relative"),
   CustomFieldsCriterionOption,
 ];
 export const PerformerListFilterOptions = new ListFilterOptions(

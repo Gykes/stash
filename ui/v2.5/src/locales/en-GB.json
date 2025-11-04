@@ -166,6 +166,7 @@
   "between_and": "and",
   "birth_year": "Birth Year",
   "birthdate": "Birthdate",
+  "birthdate_relative": "Birthdate (Relative)",
   "bitrate": "Bit Rate",
   "blobs_storage_type": {
     "database": "Database",
@@ -839,6 +840,7 @@
   "country": "Country",
   "cover_image": "Cover Image",
   "created_at": "Created At",
+  "created_at_relative": "Created At (Relative)",
   "criterion": {
     "greater_than": "Greater than",
     "less_than": "Less than",
@@ -878,9 +880,11 @@
     "value": "Value"
   },
   "date": "Date",
+  "date_relative": "Date (Relative)",
   "date_format": "YYYY-MM-DD",
   "datetime_format": "YYYY-MM-DD HH:MM",
   "death_date": "Death Date",
+  "death_date_relative": "Death Date (Relative)",
   "death_year": "Death Year",
   "descending": "Descending",
   "description": "Description",
@@ -1151,6 +1155,7 @@
   "isMissing": "Is Missing",
   "last_o_at": "Last O At",
   "last_played_at": "Last Played At",
+  "last_played_at_relative": "Last Played At (Relative)",
   "library": "Library",
   "loading": {
     "generic": "Loading…",
@@ -1309,10 +1314,13 @@
   "scene_code": "Studio Code",
   "scene_count": "Scene Count",
   "scene_created_at": "Scene Created At",
+  "scene_created_at_relative": "Scene Created At (Relative)",
   "scene_date": "Date of Scene",
+  "scene_date_relative": "Date of Scene (Relative)",
   "scene_id": "Scene ID",
   "scene_tags": "Scene Tags",
   "scene_updated_at": "Scene Updated At",
+  "scene_updated_at_relative": "Scene Updated At (Relative)",
   "scenes": "Scenes",
   "scenes_updated_at": "Scene Updated At",
   "search_filter": {
@@ -1506,6 +1514,11 @@
   "tattoos": "Tattoos",
   "time": "Time",
   "time_end": "End Time",
+  "time_unit": {
+    "days": "Days",
+    "months": "Months",
+    "years": "Years"
+  },
   "title": "Title",
   "toast": {
     "added_entity": "Added {count, plural, one {{singularEntity}} other {{pluralEntity}}}",
@@ -1532,6 +1545,7 @@
   "type": "Type",
   "unknown_date": "Unknown date",
   "updated_at": "Updated At",
+  "updated_at_relative": "Updated At (Relative)",
   "url": "URL",
   "urls": "URLs",
   "validation": {

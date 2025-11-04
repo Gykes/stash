@@ -104,6 +104,9 @@ func (qb *galleryFilterHandler) criterionHandler() criterionHandler {
 		&dateCriterionHandler{filter.Date, "galleries.date", nil},
 		&timestampCriterionHandler{filter.CreatedAt, "galleries.created_at", nil},
 		&timestampCriterionHandler{filter.UpdatedAt, "galleries.updated_at", nil},
+		&relativeDateCriterionHandler{filter.DateRelative, "galleries.date", nil, true},
+		&relativeDateCriterionHandler{filter.CreatedAtRelative, "galleries.created_at", nil, false},
+		&relativeDateCriterionHandler{filter.UpdatedAtRelative, "galleries.updated_at", nil, false},
 
 		&relatedFilterHandler{
 			relatedIDCol:   "scenes_galleries.scene_id",

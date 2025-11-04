@@ -115,6 +115,14 @@ type SceneFilterType struct {
 	CreatedAt *TimestampCriterionInput `json:"created_at"`
 	// Filter by updated at
 	UpdatedAt *TimestampCriterionInput `json:"updated_at"`
+	// Filter by scene last played time (relative)
+	LastPlayedAtRelative *RelativeDateCriterionInput `json:"last_played_at_relative"`
+	// Filter by date (relative)
+	DateRelative *RelativeDateCriterionInput `json:"date_relative"`
+	// Filter by creation time (relative)
+	CreatedAtRelative *RelativeDateCriterionInput `json:"created_at_relative"`
+	// Filter by last update time (relative)
+	UpdatedAtRelative *RelativeDateCriterionInput `json:"updated_at_relative"`
 }
 
 type SceneQueryOptions struct {

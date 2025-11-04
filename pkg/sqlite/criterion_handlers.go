@@ -280,6 +280,33 @@ func (h *timestampCriterionHandler) handle(ctx context.Context, f *filterBuilder
 	}
 }
 
+// relativeDateCriterionHandler handles relative date filters (e.g., "last 30 days")
+type relativeDateCriterionHandler struct {
+	c          *models.RelativeDateCriterionInput
+	column     string
+	joinFn     func(f *filterBuilder)
+	isDateOnly bool // true for date columns, false for timestamp columns
+}
+
+func (h *relativeDateCriterionHandler) handle(ctx context.Context, f *filterBuilder) {
+	if h.c != nil {
+		if h.joinFn != nil {
+			h.joinFn(f)
+		}
+
+		var clause string
+		var args []interface{}
+
+		if h.isDateOnly {
+			clause, args = getRelativeDateCriterionWhereClause(h.column, *h.c)
+		} else {
+			clause, args = getRelativeTimestampCriterionWhereClause(h.column, *h.c)
+		}
+
+		f.addWhere(clause, args...)
+	}
+}
+
 func yearFilterCriterionHandler(year *models.IntCriterionInput, col string) criterionHandlerFunc {
 	return func(ctx context.Context, f *filterBuilder) {
 		if year != nil && year.Modifier.IsValid() {

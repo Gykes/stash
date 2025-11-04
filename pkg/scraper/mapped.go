@@ -1038,7 +1038,6 @@ func (s mappedScraper) processSceneRelationships(ctx context.Context, q mappedQu
 		logger.Debug(`Processing scene movies:`)
 		ret.Movies = processRelationships[models.ScrapedMovie](ctx, s, sceneMoviesMap, q)
 	}
-
 	return len(ret.Performers) > 0 || len(ret.Tags) > 0 || ret.Studio != nil || len(ret.Movies) > 0
 }
 

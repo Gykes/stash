@@ -4,6 +4,7 @@ import {
   createStringCriterionOption,
   createDateCriterionOption,
   createMandatoryTimestampCriterionOption,
+  createRelativeDateCriterionOption,
   createDurationCriterionOption,
 } from "./criteria/criterion";
 import { HasMarkersCriterionOption } from "./criteria/has-markers";
@@ -122,8 +123,12 @@ const criterionOptions = [
   createMandatoryNumberCriterionOption("interactive_speed"),
   createMandatoryNumberCriterionOption("file_count"),
   createDateCriterionOption("date"),
+  createRelativeDateCriterionOption("date_relative", "date_relative"),
+  createMandatoryTimestampCriterionOption("last_played_at_relative"),
   createMandatoryTimestampCriterionOption("created_at"),
+  createRelativeDateCriterionOption("created_at_relative", "created_at_relative"),
   createMandatoryTimestampCriterionOption("updated_at"),
+  createRelativeDateCriterionOption("updated_at_relative", "updated_at_relative"),
 ];
 
 export const SceneListFilterOptions = new ListFilterOptions(

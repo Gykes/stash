@@ -190,6 +190,14 @@ input PerformerFilterType {
   created_at: TimestampCriterionInput
   "Filter by last update time"
   updated_at: TimestampCriterionInput
+  "Filter by birthdate (relative)"
+  birthdate_relative: RelativeDateCriterionInput
+  "Filter by death date (relative)"
+  death_date_relative: RelativeDateCriterionInput
+  "Filter by creation time (relative)"
+  created_at_relative: RelativeDateCriterionInput
+  "Filter by last update time (relative)"
+  updated_at_relative: RelativeDateCriterionInput
 
   custom_fields: [CustomFieldCriterionInput!]
 }
@@ -215,6 +223,16 @@ input SceneMarkerFilterType {
   scene_created_at: TimestampCriterionInput
   "Filter by lscene ast update time"
   scene_updated_at: TimestampCriterionInput
+  "Filter by creation time (relative)"
+  created_at_relative: RelativeDateCriterionInput
+  "Filter by last update time (relative)"
+  updated_at_relative: RelativeDateCriterionInput
+  "Filter by scene date (relative)"
+  scene_date_relative: RelativeDateCriterionInput
+  "Filter by scene creation time (relative)"
+  scene_created_at_relative: RelativeDateCriterionInput
+  "Filter by scene last update time (relative)"
+  scene_updated_at_relative: RelativeDateCriterionInput
   "Filter by related scenes that meet this criteria"
   scene_filter: SceneFilterType
 }
@@ -314,6 +332,14 @@ input SceneFilterType {
   created_at: TimestampCriterionInput
   "Filter by last update time"
   updated_at: TimestampCriterionInput
+  "Filter by scene last played time (relative)"
+  last_played_at_relative: RelativeDateCriterionInput
+  "Filter by date (relative)"
+  date_relative: RelativeDateCriterionInput
+  "Filter by creation time (relative)"
+  created_at_relative: RelativeDateCriterionInput
+  "Filter by last update time (relative)"
+  updated_at_relative: RelativeDateCriterionInput
 
   "Filter by related galleries that meet this criteria"
   galleries_filter: GalleryFilterType
@@ -363,6 +389,12 @@ input MovieFilterType {
   created_at: TimestampCriterionInput
   "Filter by last update time"
   updated_at: TimestampCriterionInput
+  "Filter by date (relative)"
+  date_relative: RelativeDateCriterionInput
+  "Filter by creation time (relative)"
+  created_at_relative: RelativeDateCriterionInput
+  "Filter by last update time (relative)"
+  updated_at_relative: RelativeDateCriterionInput
 
   "Filter by related scenes that meet this criteria"
   scenes_filter: SceneFilterType
@@ -401,6 +433,12 @@ input GroupFilterType {
   created_at: TimestampCriterionInput
   "Filter by last update time"
   updated_at: TimestampCriterionInput
+  "Filter by date (relative)"
+  date_relative: RelativeDateCriterionInput
+  "Filter by creation time (relative)"
+  created_at_relative: RelativeDateCriterionInput
+  "Filter by last update time (relative)"
+  updated_at_relative: RelativeDateCriterionInput
 
   "Filter by containing groups"
   containing_groups: HierarchicalMultiCriterionInput
@@ -462,6 +500,10 @@ input StudioFilterType {
   created_at: TimestampCriterionInput
   "Filter by last update time"
   updated_at: TimestampCriterionInput
+  "Filter by creation time (relative)"
+  created_at_relative: RelativeDateCriterionInput
+  "Filter by last update time (relative)"
+  updated_at_relative: RelativeDateCriterionInput
 }
 
 input GalleryFilterType {
@@ -523,6 +565,12 @@ input GalleryFilterType {
   code: StringCriterionInput
   "Filter by photographer"
   photographer: StringCriterionInput
+  "Filter by date (relative)"
+  date_relative: RelativeDateCriterionInput
+  "Filter by creation time (relative)"
+  created_at_relative: RelativeDateCriterionInput
+  "Filter by last update time (relative)"
+  updated_at_relative: RelativeDateCriterionInput
 
   "Filter by related scenes that meet this criteria"
   scenes_filter: SceneFilterType
@@ -610,6 +658,10 @@ input TagFilterType {
 
   "Filter by last update time"
   updated_at: TimestampCriterionInput
+  "Filter by creation time (relative)"
+  created_at_relative: RelativeDateCriterionInput
+  "Filter by last update time (relative)"
+  updated_at_relative: RelativeDateCriterionInput
 }
 
 input ImageFilterType {
@@ -670,6 +722,12 @@ input ImageFilterType {
   code: StringCriterionInput
   "Filter by photographer"
   photographer: StringCriterionInput
+  "Filter by date (relative)"
+  date_relative: RelativeDateCriterionInput
+  "Filter by creation time (relative)"
+  created_at_relative: RelativeDateCriterionInput
+  "Filter by last update time (relative)"
+  updated_at_relative: RelativeDateCriterionInput
 
   "Filter by related galleries that meet this criteria"
   galleries_filter: GalleryFilterType
@@ -720,6 +778,12 @@ input FileFilterType {
   created_at: TimestampCriterionInput
   "Filter by last update time"
   updated_at: TimestampCriterionInput
+  "Filter by modification time (relative)"
+  mod_time_relative: RelativeDateCriterionInput
+  "Filter by creation time (relative)"
+  created_at_relative: RelativeDateCriterionInput
+  "Filter by last update time (relative)"
+  updated_at_relative: RelativeDateCriterionInput
 }
 
 input FolderFilterType {
@@ -746,6 +810,12 @@ input FolderFilterType {
   created_at: TimestampCriterionInput
   "Filter by last update time"
   updated_at: TimestampCriterionInput
+  "Filter by modification time (relative)"
+  mod_time_relative: RelativeDateCriterionInput
+  "Filter by creation time (relative)"
+  created_at_relative: RelativeDateCriterionInput
+  "Filter by last update time (relative)"
+  updated_at_relative: RelativeDateCriterionInput
 }
 
 input VideoFileFilterInput {
@@ -856,6 +926,18 @@ input DateCriterionInput {
 input TimestampCriterionInput {
   value: String!
   value2: String
+  modifier: CriterionModifier!
+}
+
+enum TimeUnit {
+  DAYS
+  MONTHS
+  YEARS
+}
+
+input RelativeDateCriterionInput {
+  value: Int!
+  unit: TimeUnit!
   modifier: CriterionModifier!
 }
 

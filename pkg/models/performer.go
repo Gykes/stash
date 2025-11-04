@@ -200,6 +200,14 @@ type PerformerFilterType struct {
 	CreatedAt *TimestampCriterionInput `json:"created_at"`
 	// Filter by updated at
 	UpdatedAt *TimestampCriterionInput `json:"updated_at"`
+	// Filter by birthdate (relative)
+	BirthdateRelative *RelativeDateCriterionInput `json:"birthdate_relative"`
+	// Filter by death date (relative)
+	DeathDateRelative *RelativeDateCriterionInput `json:"death_date_relative"`
+	// Filter by creation time (relative)
+	CreatedAtRelative *RelativeDateCriterionInput `json:"created_at_relative"`
+	// Filter by last update time (relative)
+	UpdatedAtRelative *RelativeDateCriterionInput `json:"updated_at_relative"`
 
 	// Filter by custom fields
 	CustomFields []CustomFieldCriterionInput `json:"custom_fields"`

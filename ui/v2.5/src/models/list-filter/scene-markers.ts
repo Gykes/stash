@@ -7,6 +7,7 @@ import {
   createDateCriterionOption,
   createMandatoryTimestampCriterionOption,
   createNullDurationCriterionOption,
+  createRelativeDateCriterionOption,
 } from "./criteria/criterion";
 
 const defaultSortBy = "title";
@@ -26,10 +27,15 @@ const criterionOptions = [
   PerformersCriterionOption,
   createNullDurationCriterionOption("duration"),
   createMandatoryTimestampCriterionOption("created_at"),
+  createRelativeDateCriterionOption("created_at_relative", "created_at_relative"),
   createMandatoryTimestampCriterionOption("updated_at"),
+  createRelativeDateCriterionOption("updated_at_relative", "updated_at_relative"),
   createDateCriterionOption("scene_date"),
+  createRelativeDateCriterionOption("scene_date_relative", "scene_date_relative"),
   createMandatoryTimestampCriterionOption("scene_created_at"),
+  createRelativeDateCriterionOption("scene_created_at_relative", "scene_created_at_relative"),
   createMandatoryTimestampCriterionOption("scene_updated_at"),
+  createRelativeDateCriterionOption("scene_updated_at_relative", "scene_updated_at_relative"),
 ];
 
 export const SceneMarkerListFilterOptions = new ListFilterOptions(

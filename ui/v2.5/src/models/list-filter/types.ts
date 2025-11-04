@@ -47,6 +47,10 @@ export interface IRangeValue<V> {
 export type INumberValue = IRangeValue<number>;
 export type IDateValue = IRangeValue<string>;
 export type ITimestampValue = IRangeValue<string>;
+export interface IRelativeDateValue {
+  value: number;
+  unit: string; // "DAYS" | "MONTHS" | "YEARS"
+}
 export interface IPHashDuplicationValue {
   duplicated: boolean;
   distance?: number; // currently not implemented

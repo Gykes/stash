@@ -38,6 +38,12 @@ type FileFilterType struct {
 	GalleriesFilter *GalleryFilterType               `json:"galleries_filter"`
 	CreatedAt       *TimestampCriterionInput         `json:"created_at"`
 	UpdatedAt       *TimestampCriterionInput         `json:"updated_at"`
+	// Filter by modification time (relative)
+	ModTimeRelative *RelativeDateCriterionInput `json:"mod_time_relative"`
+	// Filter by creation time (relative)
+	CreatedAtRelative *RelativeDateCriterionInput `json:"created_at_relative"`
+	// Filter by update time (relative)
+	UpdatedAtRelative *RelativeDateCriterionInput `json:"updated_at_relative"`
 }
 
 func PathsFileFilter(paths []string) *FileFilterType {

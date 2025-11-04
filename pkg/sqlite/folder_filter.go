@@ -64,6 +64,9 @@ func (qb *folderFilterHandler) criterionHandler() criterionHandler {
 
 		&timestampCriterionHandler{folderFilter.CreatedAt, "folders.created_at", nil},
 		&timestampCriterionHandler{folderFilter.UpdatedAt, "folders.updated_at", nil},
+		&relativeDateCriterionHandler{folderFilter.ModTimeRelative, "folders.mod_time", nil, false},
+		&relativeDateCriterionHandler{folderFilter.CreatedAtRelative, "folders.created_at", nil, false},
+		&relativeDateCriterionHandler{folderFilter.UpdatedAtRelative, "folders.updated_at", nil, false},
 
 		&relatedFilterHandler{
 			relatedIDCol:   "galleries.id",

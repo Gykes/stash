@@ -86,6 +86,8 @@ func (qb *tagFilterHandler) criterionHandler() criterionHandler {
 		tagHierarchyHandler.ChildCountCriterionHandler(tagFilter.ChildCount),
 		&timestampCriterionHandler{tagFilter.CreatedAt, "tags.created_at", nil},
 		&timestampCriterionHandler{tagFilter.UpdatedAt, "tags.updated_at", nil},
+		&relativeDateCriterionHandler{tagFilter.CreatedAtRelative, "tags.created_at", nil, false},
+		&relativeDateCriterionHandler{tagFilter.UpdatedAtRelative, "tags.updated_at", nil, false},
 
 		&relatedFilterHandler{
 			relatedIDCol:   "scenes_tags.scene_id",
