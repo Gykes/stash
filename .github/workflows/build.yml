@@ -211,16 +211,17 @@ jobs:
         path: artifacts
 
     # Reassemble platform binaries from matrix job artifacts into a single dist/ directory
+    # upload-artifact@v4 strips the common path prefix (dist/), so files are at the artifact root
     - name: Collect binaries
       run: |
         mkdir -p dist
-        cp artifacts/build-windows/dist/* dist/ || true
-        cp artifacts/build-macos/dist/* dist/ || true
-        cp artifacts/build-linux/dist/* dist/ || true
-        cp artifacts/build-linux-arm64v8/dist/* dist/ || true
-        cp artifacts/build-linux-arm32v7/dist/* dist/ || true
-        cp artifacts/build-linux-arm32v6/dist/* dist/ || true
-        cp artifacts/build-freebsd/dist/* dist/ || true
+        cp artifacts/build-windows/* dist/ || true
+        cp artifacts/build-macos/* dist/ || true
+        cp artifacts/build-linux/* dist/ || true
+        cp artifacts/build-linux-arm64v8/* dist/ || true
+        cp artifacts/build-linux-arm32v7/* dist/ || true
+        cp artifacts/build-linux-arm32v6/* dist/ || true
+        cp artifacts/build-freebsd/* dist/ || true
 
     - name: Zip UI
       run: |
