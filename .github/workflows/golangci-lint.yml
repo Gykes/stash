@@ -17,10 +17,12 @@ jobs:
     name: lint
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
-
-      - name: Checkout
-        run: git fetch --prune --unshallow --tags
+      # v4 handles full clone + tag fetching natively via fetch-depth/fetch-tags,
+      # replacing the old v2 + separate `git fetch --prune --unshallow --tags` step
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          fetch-tags: true
 
       - name: Setup Go
         uses: actions/setup-go@v5
