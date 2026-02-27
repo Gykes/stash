@@ -169,8 +169,24 @@ jobs:
         path: .go-cache
         key: ${{ runner.os }}-go-cache-${{ matrix.platform }}-${{ hashFiles('go.mod', '**/go.sum') }}
 
-    - name: Pull compiler image
-      run: docker pull $COMPILER_IMAGE
+    # Cache the compiler image to avoid pulling ~1GB on every run.
+    # The image only contains toolchains, not project code (that's bind-mounted).
+    # Bump the cache key suffix if stashapp/compiler is updated.
+    - name: Cache compiler image
+      id: cache-compiler
+      uses: actions/cache@v4
+      with:
+        path: /tmp/compiler-image.tar
+        key: compiler-image-${{ env.COMPILER_IMAGE }}
+
+    - name: Load or pull compiler image
+      run: |
+        if [ "${{ steps.cache-compiler.outputs.cache-hit }}" == "true" ]; then
+          docker load -i /tmp/compiler-image.tar
+        else
+          docker pull $COMPILER_IMAGE
+          docker save $COMPILER_IMAGE -o /tmp/compiler-image.tar
+        fi
 
     - name: Start build container
       env:
